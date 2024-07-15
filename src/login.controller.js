@@ -15,7 +15,6 @@ const loginUser = async (req, res, next) => {
     const refreshToken = await jwt.sign(user, "refresh_secret", {
       expiresIn: "7d",
     });
-    res.set("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: true,
@@ -41,7 +40,6 @@ const refreshToken = async (req, res, next) => {
       const newAccessToken = jwt.sign({ id: decoded.id }, "access_secret", {
         expiresIn: "15m",
       });
-      res.set("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
       res.cookie("accessToken", newAccessToken, {
         httpOnly: true,
         secure: true,

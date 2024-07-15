@@ -13,18 +13,6 @@ app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true,
-    methods: ["GET", "OPTIONS", "PATCH", "DELETE", "POST", "PUT"],
-    allowedHeaders: [
-      "X-CSRF-Token",
-      "X-Requested-With",
-      "Accept",
-      "Accept-Version",
-      "Content-Length",
-      "Content-MD5",
-      "Content-Type",
-      "Date",
-      "X-Api-Version",
-    ],
   })
 );
 
@@ -37,7 +25,6 @@ app.use(express.urlencoded({ extended: true, limit: "16KB" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 app.get("/", (req, res, next) => {
-  res.set("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
   return res.send("Hell from server");
 });
 
