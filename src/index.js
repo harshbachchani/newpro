@@ -11,7 +11,10 @@ const httpServer = createServer(app);
 
 const allowCors = (fn) => async (req, res) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Origin", "*"); // Replace with your actual frontend URL if needed
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://fortesting-beige.vercel.app"
+  ); // Replace with your actual frontend URL if needed
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, OPTIONS, PATCH, DELETE, POST, PUT"
