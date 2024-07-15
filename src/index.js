@@ -37,6 +37,7 @@ app.use(express.urlencoded({ extended: true, limit: "16KB" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 app.get("/", (req, res, next) => {
+  res.set("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
   return res.send("Hell from server");
 });
 
