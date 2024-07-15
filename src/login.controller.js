@@ -1,13 +1,13 @@
 import jwt from "jsonwebtoken";
 
 const loginUser = async (req, res, next) => {
-  console.log(process.env.CORS_ORIGIN);
   const user = {
     name: "Harsh Bachchani",
     email: "harshbachchani@gmail.com",
     password: "HarshB",
     username: "harsh",
   };
+  console.log("Hello from me");
   if (user) {
     const accessToken = await jwt.sign(user, "access_secret", {
       expiresIn: "15m",
@@ -31,24 +31,39 @@ const loginUser = async (req, res, next) => {
   }
 };
 const refreshToken = async (req, res, next) => {
-  const { refreshToken } = req.cookies;
-
-  if (refreshToken) {
-    await jwt.verify(refreshToken, "refresh_secret", (err, decoded) => {
-      if (err)
-        return res.status(403).json({ message: "Invalid refresh token" });
-      const newAccessToken = jwt.sign({ id: decoded.id }, "access_secret", {
-        expiresIn: "15m",
+  try {
+    const { refreshToken } = req.cookies;
+    console.log(refreshToken);
+    console.log("Hii from me");
+    const user = {
+      name: "Harsh Bachchani",
+      email: "harshbachchani@gmail.com",
+      password: "HarshB",
+      username: "harsh",
+    };
+    if (refreshToken) {
+      await jwt.verify(refreshToken, "refresh_secret", (err, decoded) => {
+        if (err)
+          return res.status(403).json({ message: "Invalid refresh token" });
+        const newAccessToken = jwt.sign(user, "access_secret", {
+          expiresIn: "15m",
+        });
+        console.log(newAccessToken);
+        res.cookie("accessToken", newAccessToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "Strict",
+        });
+        res.json({ message: "Token refreshed" });
       });
-      res.cookie("accessToken", newAccessToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "Strict",
-      });
-      res.json({ message: "Token refreshed" });
-    });
-  } else {
-    res.status(401).json({ message: "No refresh token provided" });
+    } else {
+      console.log("Helll from threr");
+      res.status(401).json({ message: "No refresh token provided" });
+    }
+  } catch (error) {
+    return res
+      .status(501)
+      .json({ message: "Internal Server Error", err: error });
   }
 };
 export { loginUser, refreshToken };
