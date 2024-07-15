@@ -31,7 +31,7 @@ const loginUser = async (req, res, next) => {
 };
 const refreshToken = async (req, res, next) => {
   const { refreshToken } = req.cookies;
-  console.log(req.cookies);
+
   if (refreshToken) {
     await jwt.verify(refreshToken, "refresh_secret", (err, decoded) => {
       if (err)
