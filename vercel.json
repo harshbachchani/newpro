@@ -9,7 +9,7 @@
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "http://localhost:5173"
+          "value": "https://fortesting-beige.vercel.app"
         },
         {
           "key": "Access-Control-Allow-Methods",
@@ -27,7 +27,7 @@
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "http://localhost:5173"
+          "value": "https://fortesting-beige.vercel.app"
         },
         {
           "key": "Access-Control-Allow-Methods",
