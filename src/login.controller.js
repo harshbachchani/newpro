@@ -33,8 +33,10 @@ const loginUser = async (req, res, next) => {
 const refreshToken = async (req, res, next) => {
   try {
     const { refreshToken } = req.cookies;
-    console.log(refreshToken);
     console.log("Hii from me");
+    console.log(req.cookies);
+    console.log(req.params);
+    console.log(req.headers);
     const user = {
       name: "Harsh Bachchani",
       email: "harshbachchani@gmail.com",
